@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas GIF Animation</title>
+</head>
+<body>
+
+<canvas id="gifCanvas" width="400" height="400" style="border:1px solid #000;"></canvas>
+
+<script>
+  const canvas = document.getElementById("gifCanvas");
+  const ctx = canvas.getContext("2d");
+
+  let frame = 0;
+
+  // Colors and positions for animation frames
+  const frames = [
+    { color: "red", x: 50, y: 50 },
+    { color: "blue", x: 100, y: 100 },
+    { color: "green", x: 150, y: 150 },
+    { color: "yellow", x: 200, y: 200 },
+  ];
+
+  function drawFrame() {
+    // Clear the canvas
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Get current frame properties
+    const currentFrame = frames[frame];
+
+    // Draw rectangle for the current frame
+    ctx.fillStyle = currentFrame.color;
+    ctx.fillRect(currentFrame.x, currentFrame.y, 100, 100);
+
+    // Update frame index for the next loop
+    frame = (frame + 1) % frames.length;
+
+    // Loop the animation
+    setTimeout(drawFrame, 200); // Change frame every 200ms
+  }
+
+  // Start the animation
+  drawFrame();
+</script>
+
+</body>
+</html>
